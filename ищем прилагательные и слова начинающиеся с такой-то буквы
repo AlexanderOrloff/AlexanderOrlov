@@ -1,0 +1,39 @@
+def open_text(text):
+    words = []
+    with open(text, 'r', encoding ='utf-8') as f:
+        text = f.read().lower()
+        text = text.split()
+        for item in text:
+            item = item.strip('.,?!-')
+            if item not in words:
+                words.append(item)
+    return words
+
+def first letter(letter, word):
+    newwords = []
+    for item in words:
+        if item[0] == letter:
+            newwords.append()
+    return newwords
+
+def adjectives(a):
+    adjectives = []
+    for item in a:
+        if item[-2: 0] =='ой' or item[-2: 0] =='ый' or item[-2: 0] =='ий' or item[-2: 0] =='ое' oritem[-2: 0] =='ая' item[-2: 0] =='яя' or item[-2: 0] =='ёе':
+            adjectives.append(item)
+        return adjectives
+
+def questions():
+    yourwords = []
+    letter = input('letter?')
+    text = input('text?')
+    number = int(input('lenght?'))
+    a = open_text(text)
+    b = first_letter(letter, a)
+    for item in b:
+        if len item > number:
+            yourwords. append(item)
+    print(adjectives(open_text(text)))
+    return yourwords
+
+print(questions())
