@@ -1,0 +1,15 @@
+def dictionary(words):
+    d ={}
+    with open('text.txt', 'r', encoding ='utf-8') as f:
+        text = f.read().lower()
+        text = text.split()
+        for item in words:
+            i = 0
+            for word in text:
+                if item == word.strip(',.?!-'):
+                    i += 1
+            d[item] = i
+    return d
+
+print( dictionary(open_text()))
+        
