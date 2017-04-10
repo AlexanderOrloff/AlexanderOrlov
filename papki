@@ -26,10 +26,10 @@ def task3():
 def task4():
     folder = '.'
     txt, csv, xsl = 0,0,0
-    for f in os.listdir(folder):
-        if  '.txt' in f:
+    for f os.listdir(folder):
+        if  f.endswith('.txt') in f:
             txt += 1
-        if r '.csv' in f:
+        if '.csv' in f:
             csv+= 1
         if '.xsl' in f:
             xsl+= 1
