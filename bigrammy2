@@ -1,0 +1,25 @@
+import re
+
+def open_file(title):
+    with open(title, 'r', encoding = 'utf-8') as a: 
+        words = [word.strip(' ,.?!-:;').lower() for word in a.read().split()]
+        return words
+
+def find_bigramm(words):
+    text = ''
+    for word in words:
+        text += word + ' '
+    for x in range(len(words)):
+        if x+1 != len(words):
+            bigramm = words[x] + ' ' + words[x+1]
+            m = re.findall(bigramm, text, flags = re.U)
+            if len(m) > 2:
+                print(True)
+                break
+
+def main():
+    s = input()
+    f = open_file(s)
+    z = find_bigramm(f)
+
+main()
