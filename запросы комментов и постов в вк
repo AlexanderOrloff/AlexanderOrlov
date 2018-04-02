@@ -1,0 +1,34 @@
+import urllib.request # импортируем модуль
+import json
+import re
+req = urllib.request.Request('https://api.vk.com/method/wall.get?owner_id=1&v=5.7&access_token=061f0367061f0367061f0367ee067d2f110061f061f03675cdedd2997195e66c513dd9d')
+response = urllib.request.urlopen(req) # да, так тоже можно, не обязательно делать это с with, как в примере выше
+result = response.read().decode('utf-8')
+print(result)
+data = json.loads(result)
+ids = re.findall('"id":[1234567890]*', result)
+print(ids)
+for i in range (0, len(ids)):
+    number = re.search('[1234567890]+', str(ids[i]))
+    print (number.group(0))
+    if number.group(0) != '':
+        line =''
+        line = 'https://api.vk.com/method/wall.getComments?owner_id=1&' + "post_id="+ str(number.group(0))+'&v=5.7&access_token=061f0367061f0367061f0367ee067d2f110061f061f03675cdedd2997195e66c513dd9d'
+        reqC = urllib.request.Request(line)
+        responseC = urllib.request.urlopen(reqC)
+        resultC = responseC.read().decode('utf-8')
+        print(resultC)
+commentors = re.findall('"from_id":[1234567890]*', resultC)
+print(commentors)
+d = {}
+for i in range(0,len(commentors)):
+    id = re.search('[1234567890]+', commentors[i])
+    id_true = id.group(0)
+    print (id_true)
+    if id_true not in d:
+        d[id_true] = 1
+    else:
+        d[id_true] +=1
+print(d)
+#чтобы он искал не только в числе первой сотни, можно в цикле сделать переменную приростающую на 100  и  впихивать ее в параметр оффсет
+#понятно, что так можно найти и самого частого комментатора
